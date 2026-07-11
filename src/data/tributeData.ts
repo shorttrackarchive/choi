@@ -248,20 +248,15 @@ timeline: [
     seasonSummary:
       "시니어 무대에 첫발을 내디딘 시즌. 최민정은 곧바로 세계 정상에 오르며 한국 쇼트트랙의 새로운 에이스로 떠올랐다.",
     image: {
-      src: "/images/tribute/timeline/timeline-2014-15.jpg",
+      src: "/images/tribute/timeline/timeline-2014-15.png",
       alt: "2014-15 시즌 최민정 선수",
       placeholder: "",
       ratio: "16 / 11",
       position: "50% 45%",
     },
     olympics: [],
-    worldChampionships: [
-      "종합 우승",
-      "금메달 2개 · 동메달 1개",
-    ],
-    worldCupOrWorldTour: [
-      "금메달 8개 · 은메달 4개",
-    ],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
     additionalNote: "",
   },
 ],
