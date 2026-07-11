@@ -199,10 +199,16 @@ export const tributeData: TributeData = {
       {
         id: "world-medals",
         label: "세계선수권 메달",
-        value: null,
+        value: 24,
         unit: "개",
-        note: "슈퍼파이널 제외, 실제 숫자 입력 예정",
-        image: slot("CAREER 02", "세계선수권 관련 이미지", "16 / 9", "50% 50%"),
+        note: "금메달 17개, 은메달 6개, 동메달 1개",
+        image:  {
+    src: "/images/tribute/career/career-02.avif",
+    alt: "최민정 선수 헌정 페이지 히어로 이미지",
+    placeholder: "",
+    ratio: "21 / 13",
+    position: "50% 35%",
+  },
       },
       {
         id: "worldcup-medals",
