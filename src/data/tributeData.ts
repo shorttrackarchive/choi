@@ -233,10 +233,10 @@ export const tributeData: TributeData = {
       },
       {
         id: "other-medals",
-        label: "기타 국제대회 메달",
+        label: "기타 국제대회 메달 및 개인 최고기록",
         value: 25,
         unit: "개",
-        note: "금메달 17개, 은메달 2개, 동메달 6개",
+        note: "금메달 17개, 은메달 2개, 동메달 6개<br>종목별 개인 최고기록",
         image: {
     src: "/images/tribute/career/career-04.jpg",
     alt: "최민정 선수 헌정 페이지 히어로 이미지",
