@@ -295,6 +295,24 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+       {
+    id: "season-2017-18",
+    season: "2017/2018",
+    seasonLabel: "가장 찬란하게 빛난 시즌",
+    seasonSummary:
+      "세계 무대를 지배하던 최민정은 평창에서도 가장 높은 자리에 올랐다. 월드컵, 세계선수권, 올림픽까지 자신의 이름으로 물들인 가장 완벽한 시즌이었다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2017-18.png",
+      alt: "2017-18 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
