@@ -240,22 +240,31 @@ export const tributeData: TributeData = {
       },
     ],
   },
-  timeline: Array.from({ length: 6 }, (_, index) => ({
-    id: `season-${index + 1}`,
-    season: `SEASON ${String(index + 1).padStart(2, "0")}`,
-    seasonLabel: "시즌명이 들어갑니다.",
-    seasonSummary: "시즌 요약이 들어갑니다.",
-    image: slot(
-      `TIMELINE ${String(index + 1).padStart(2, "0")}`,
-      "시즌 대표 이미지",
-      index % 2 === 0 ? "16 / 11" : "4 / 5",
-      "50% 45%",
-    ),
+timeline: [
+  {
+    id: "season-2014-15",
+    season: "2014/2015",
+    seasonLabel: "빙판 위에 떠오른 새로운 이름",
+    seasonSummary:
+      "시니어 무대에 첫발을 내디딘 시즌. 최민정은 곧바로 세계 정상에 오르며 한국 쇼트트랙의 새로운 에이스로 떠올랐다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2014-15.jpg",
+      alt: "2014-15 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
     olympics: [],
-    worldChampionships: [],
-    worldCupOrWorldTour: [],
+    worldChampionships: [
+      "종합 우승",
+      "금메달 2개 · 동메달 1개",
+    ],
+    worldCupOrWorldTour: [
+      "금메달 8개 · 은메달 4개",
+    ],
     additionalNote: "",
-  })),
+  },
+],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
       "imageLeft",
