@@ -259,6 +259,24 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+   {
+    id: "season-2015-16",
+    season: "2015/2016",
+    seasonLabel: "에이스에서 최강자로",
+    seasonSummary:
+      "월드컵 종합우승과 세계선수권 종합우승을 모두 석권한 시즌. 데뷔 두 시즌 만에 최민정은 세계 쇼트트랙의 정점에 섰다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2014-15.png",
+      alt: "2015-16 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
