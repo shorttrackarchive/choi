@@ -385,6 +385,24 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+             {
+    id: "season-2022-23",
+    season: "2022/2023",
+    seasonLabel: "새로운 이름들 사이에서",
+    seasonSummary:
+      "새로운 선수들이 빙판 위에 이름을 올리기 시작했지만, 최민정은 여전히 가장 높은 곳을 지키고 있었다. 시대의 흐름 속에서도 쉽게 밀려나지 않는 선수였다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2022-23.png",
+      alt: "2022-23 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
