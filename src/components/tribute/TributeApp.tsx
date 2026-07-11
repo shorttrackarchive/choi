@@ -6,6 +6,7 @@ import {
   type Highlight,
   type KeywordItem,
   type MedalMetric,
+  type PersonalBestRecord,
   type Poll,
   type TearMoment,
   type TimelineSeason,
@@ -288,15 +289,122 @@ function MetricScene({
         <span>{displayValue === null ? "N" : displayValue}</span>
         <small>{metric.unit}</small>
       </div>
-      <div className="metric-caption">
-        <h3>{metric.label}</h3>
-        <p>{metric.note}</p>
-      </div>
-      {metric.image ? <TributeImage slot={metric.image} /> : null}
+     <div className="metric-caption">
+  <h3>{metric.label}</h3>
+  <p>{metric.note}</p>
+
+  {metric.records && metric.records.length > 0 ? (
+    <div className="personal-records">
+      {metric.records.map((record) => (
+        <PersonalRecordRow
+          key={record.event}
+          record={record}
+          active={hasEntered}
+        />
+      ))}
+    </div>
+  ) : null}
+</div>
+
+{metric.image ? <TributeImage slot={metric.image} /> : null}
     </article>
   );
 }
+function PersonalRecordRow({
+  record,
+  active,
+}: {
+  record: PersonalBestRecord;
+  active: boolean;
+}) {
+  const [displayValue, setDisplayValue] = useState(0);
 
+  useEffect(() => {
+    if (!active) {
+      setDisplayValue(0);
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReducedMotion) {
+      setDisplayValue(record.value);
+      return;
+    }
+
+    const duration = 1200;
+    let animationFrame = 0;
+    let startTime: number | null = null;
+
+    const animate = (timestamp: number) => {
+      if (startTime === null) {
+        startTime = timestamp;
+      }
+
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      setDisplayValue(record.value * easedProgress);
+
+      if (progress < 1) {
+        animationFrame = window.requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = window.requestAnimationFrame(animate);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+    };
+  }, [active, record.value]);
+
+  return (
+    <div className="personal-record-row">
+      <span className="personal-record-event">{record.event}</span>
+
+      <span className="personal-record-value">
+        {formatShortTrackTime(displayValue)}
+
+        {record.worldRecord ? <WorldRecordIcon /> : null}
+      </span>
+    </div>
+  );
+}
+
+function formatShortTrackTime(value: number) {
+  if (value < 60) {
+    return value.toFixed(3);
+  }
+
+  const minutes = Math.floor(value / 60);
+  const seconds = value - minutes * 60;
+
+  return `${minutes}:${seconds.toFixed(3).padStart(6, "0")}`;
+}
+
+function WorldRecordIcon() {
+  return (
+    <span
+      className="world-record-icon"
+      aria-label="세계신기록"
+      title="세계신기록"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M3.5 12h17" />
+        <path d="M12 3.5c2.3 2.4 3.5 5.2 3.5 8.5S14.3 18.1 12 20.5" />
+        <path d="M12 3.5C9.7 5.9 8.5 8.7 8.5 12s1.2 6.1 3.5 8.5" />
+      </svg>
+    </span>
+  );
+}
 function CareerTimelineSection({ seasons }: { seasons: TimelineSeason[] }) {
   return (
     <section className="timeline-section section-light" id="timeline">
