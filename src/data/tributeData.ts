@@ -403,6 +403,24 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+               {
+    id: "season-2023-24",
+    season: "2023/2024",
+    seasonLabel: "처음으로 멈춰 선 시간",
+    seasonSummary:
+      "늘 다음 경기를 향해 달려왔던 최민정이 처음으로 스스로 휴식을 선택했다. 잠시 빙판을 떠나 자신을 돌보고, 다시 달릴 힘을 채운 시즌이었다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2023-24.png",
+      alt: "2023-24 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
