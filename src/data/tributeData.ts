@@ -266,7 +266,7 @@ timeline: [
     seasonSummary:
       "월드컵 종합우승과 세계선수권 종합우승을 모두 석권한 시즌. 데뷔 두 시즌 만에 최민정은 세계 쇼트트랙의 정점에 섰다.",
     image: {
-      src: "/images/tribute/timeline/timeline-2014-15.png",
+      src: "/images/tribute/timeline/timeline-2015-16.png",
       alt: "2015-16 시즌 최민정 선수",
       placeholder: "",
       ratio: "16 / 11",
