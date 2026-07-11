@@ -192,8 +192,8 @@ export const tributeData: TributeData = {
     src: "/images/tribute/career/career-01.jpg",
     alt: "최민정 선수 헌정 페이지 히어로 이미지",
     placeholder: "",
-    ratio: "21 / 13",
-    position: "50% 35%",
+    ratio: "13 / 21",
+    position: "35% 50%",
   },
       },
       {
