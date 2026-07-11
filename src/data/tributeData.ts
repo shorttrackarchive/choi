@@ -172,9 +172,9 @@ export const tributeData: TributeData = {
     nameEn: "CHOI MINJEONG",
     dedication: "오랜 시간, 당신은 하나의 시대였습니다.",
     image: {
-    src: "/images/tribute/hero/hero-01.webp",
+    src: "/images/tribute/hero/hero-01.jpg",
     alt: "최민정 선수 헌정 페이지 히어로 이미지",
-    placeholder: "HERO IMAGE",
+    placeholder: "",
     ratio: "21 / 13",
     position: "50% 35%",
   },
