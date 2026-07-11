@@ -313,6 +313,24 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+     {
+    id: "season-2018-19",
+    season: "2018/2019",
+    seasonLabel: "흔들려도, 다시",
+    seasonSummary:
+      "부상의 여파와 또 한 번의 부상으로 쉽지 않은 시즌을 보냈지만, 끝내 세계선수권에서 다시 좋은 성과를 남겼다. 흔들렸어도 무너지지는 않았던 시즌이었다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2018-19.png",
+      alt: "2018-19 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
