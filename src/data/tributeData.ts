@@ -331,6 +331,24 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+       {
+    id: "season-2019-20",
+    season: "2019/2020",
+    seasonLabel: "늦게 피어, 끝내 가장 빛나다",
+    seasonSummary:
+      "부상의 여파로 시즌 초반은 더뎠지만, 최민정은 끝까지 자신의 흐름을 되찾았다. 그리고 시즌의 마지막, 사대륙선수권 전관왕으로 가장 완벽한 마침표를 찍었다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2018-19.png",
+      alt: "2019-20 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
