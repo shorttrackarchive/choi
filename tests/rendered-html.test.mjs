@@ -33,7 +33,7 @@ test("server-renders the tribute page", async () => {
   assert.match(html, /최민정이 남긴 기록/);
   assert.match(html, /우리가 기억하는 순간/);
   assert.match(html, /오랫동안 기억하겠습니다/);
-  assert.match(html, /HERO IMAGE/);
+  assert.match(html, /\/images\/tribute\/hero\/hero-01\.jpg/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
 });
 

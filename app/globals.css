@@ -90,8 +90,12 @@ a {
 .scene-nav a {
   width: 9px;
   height: 9px;
-  border: 1px solid rgba(238, 244, 246, 0.5);
+  border: 1px solid rgba(5, 6, 8, 0.64);
   border-radius: 50%;
+  background: rgba(238, 244, 246, 0.86);
+  box-shadow:
+    0 0 0 1px rgba(238, 244, 246, 0.72),
+    0 1px 8px rgba(5, 6, 8, 0.35);
   color: transparent;
   transition:
     border-color 180ms ease,
@@ -101,8 +105,8 @@ a {
 
 .scene-nav a:hover,
 .scene-nav a:focus-visible {
-  background: var(--ice);
-  border-color: var(--ice);
+  background: var(--blue-hint);
+  border-color: var(--ink);
   transform: scale(1.25);
 }
 
@@ -110,9 +114,14 @@ a {
   position: absolute;
   right: 18px;
   width: max-content;
-  color: var(--ice);
+  border: 1px solid rgba(5, 6, 8, 0.14);
+  border-radius: 4px;
+  background: rgba(238, 244, 246, 0.94);
+  box-shadow: 0 6px 18px rgba(5, 6, 8, 0.18);
+  color: var(--ink);
   font-size: 0.76rem;
   opacity: 0;
+  padding: 3px 7px;
   transform: translateX(6px);
   transition:
     opacity 180ms ease,
@@ -457,10 +466,6 @@ a {
 
 .timeline-image {
   background: #eef4f6;
-}
-
-.timeline-image img {
-  object-fit: contain;
 }
 
 .season-details {
