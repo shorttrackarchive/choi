@@ -367,6 +367,24 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+           {
+    id: "season-2021-22",
+    season: "2021/2022",
+    seasonLabel: "의심을 넘어 다시 정상으로",
+    seasonSummary:
+      "마음이 흔들릴 만한 순간들과 부상까지 겹치며 쉽지 않은 시즌이었다. 그러나 최민정은 올림픽 2연패와 세계선수권 종합 우승으로, 끝내 변하지 않는 클래스를 보여 주었다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2021-22.png",
+      alt: "2021-22 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
