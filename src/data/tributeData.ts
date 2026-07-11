@@ -277,6 +277,24 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+     {
+    id: "season-2016-17",
+    season: "2016/2017",
+    seasonLabel: "빛과 그늘을 함께 지나며",
+    seasonSummary:
+      "월드컵과 아시안게임에서는 여전히 강했지만, 세계선수권은 빈손으로 돌아서야 했다. 훗날 최민정 스스로 가장 힘들었다고 돌아본, 빛과 그늘이 함께했던 시즌이었다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2016-17.png",
+      alt: "2016-17 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
