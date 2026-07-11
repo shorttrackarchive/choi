@@ -457,6 +457,42 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+                     {
+    id: "season-2026-27",
+    season: "2026/2027",
+    seasonLabel: "라벨",
+    seasonSummary:
+      "서머리",
+    image: {
+      src: "",
+      alt: "2026-27 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+                                          {
+    id: "season-2027-28",
+    season: "FOREVER",
+    seasonLabel: "라벨",
+    seasonSummary:
+      "서머리",
+    image: {
+      src: "",
+      alt: "2027-28 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
