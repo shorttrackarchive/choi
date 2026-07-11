@@ -328,7 +328,7 @@ function CareerTimelineSeason({ season }: { season: TimelineSeason }) {
         <p>{season.seasonLabel}</p>
       </div>
       <div className="season-body">
-        <TributeImage slot={season.image} />
+        <TributeImage slot={season.image} className="timeline-image" />
         <div className="season-details">
           <p>{season.seasonSummary}</p>
           {groups.map(([label, items]) =>

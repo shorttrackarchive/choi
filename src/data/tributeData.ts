@@ -431,7 +431,7 @@ timeline: [
       src: "/images/tribute/timeline/timeline-2024-25.png",
       alt: "2024-25 시즌 최민정 선수",
       placeholder: "",
-      ratio: "16 / 11",
+      ratio: "16 / 9",
       position: "50% 45%",
     },
     olympics: [],
@@ -439,7 +439,7 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
-                   {
+  {
     id: "season-2025-26",
     season: "2025/2026",
     seasonLabel: "마지막 올림픽, 가장 빛나는 마침표",
@@ -449,7 +449,7 @@ timeline: [
       src: "/images/tribute/timeline/timeline-2025-26.png",
       alt: "2025-26 시즌 최민정 선수",
       placeholder: "",
-      ratio: "16 / 11",
+      ratio: "16 / 9",
       position: "50% 45%",
     },
     olympics: [],
@@ -457,7 +457,7 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
-                     {
+  {
     id: "season-2026-27",
     season: "2026/2027",
     seasonLabel: "라벨",
@@ -470,7 +470,12 @@ timeline: [
       ratio: "16 / 11",
       position: "50% 45%",
     },
-                                          {
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
+  {
     id: "season-2027-28",
     season: "FOREVER",
     seasonLabel: "라벨",
@@ -483,11 +488,6 @@ timeline: [
       ratio: "16 / 11",
       position: "50% 45%",
     },
-    olympics: [],
-    worldChampionships: [],
-    worldCupOrWorldTour: [],
-    additionalNote: "",
-  },
     olympics: [],
     worldChampionships: [],
     worldCupOrWorldTour: [],

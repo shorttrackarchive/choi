@@ -455,6 +455,14 @@ a {
   gap: 28px;
 }
 
+.timeline-image {
+  background: #eef4f6;
+}
+
+.timeline-image img {
+  object-fit: contain;
+}
+
 .season-details {
   max-width: 520px;
 }
