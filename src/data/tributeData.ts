@@ -439,6 +439,24 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+                   {
+    id: "season-2025-26",
+    season: "2025/2026",
+    seasonLabel: "마지막 올림픽, 가장 빛나는 마침표",
+    seasonSummary:
+      "마지막 올림픽 무대에서도 최민정은 금메달을 목에 걸었다. 길었던 올림픽의 여정을 자신만의 방식으로 완성하며, 아름다운 유종의 미를 거둔 시즌이었다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2025-26.png",
+      alt: "2025-26 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
