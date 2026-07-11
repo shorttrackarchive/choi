@@ -349,6 +349,24 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+         {
+    id: "season-2020-21",
+    season: "2020/2021",
+    seasonLabel: "잠시 멈춰, 다시 앞으로",
+    seasonSummary:
+      "팬데믹으로 국제대회 무대를 잠시 떠나 있던 시즌. 숨을 고르고 몸과 마음을 재정비하며, 다시 달릴 시간을 준비했다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2020-21.png",
+      alt: "2020-21 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
