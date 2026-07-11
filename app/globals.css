@@ -410,7 +410,56 @@ a {
   margin: 0;
   color: rgba(238, 244, 246, 0.65);
 }
+.personal-records {
+  display: grid;
+  gap: 0;
+  margin-top: 34px;
+  border-top: 1px solid rgba(238, 244, 246, 0.2);
+}
 
+.personal-record-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-width: 260px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(238, 244, 246, 0.14);
+}
+
+.personal-record-event {
+  color: rgba(238, 244, 246, 0.68);
+  font-size: 0.96rem;
+  font-weight: 500;
+}
+
+.personal-record-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ice);
+  font-size: 1.55rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.world-record-icon {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-hint);
+}
+
+.world-record-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
 .timeline-scenes {
   max-width: 1220px;
   margin: 0 auto;
