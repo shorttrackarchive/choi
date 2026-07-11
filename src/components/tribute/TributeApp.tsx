@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   MAX_FAN_MESSAGE_LENGTH,
   type Highlight,
@@ -190,7 +190,45 @@ function MetricScene({
   metric: MedalMetric;
   index: number;
 }) {
-  const [displayValue, setDisplayValue] = useState(metric.value ?? null);
+  const sceneRef = useRef<HTMLElement>(null);
+  const [hasEntered, setHasEntered] = useState(false);
+  const [displayValue, setDisplayValue] = useState<number | null>(
+    metric.value === null ? null : 0,
+  );
+
+  useEffect(() => {
+    const scene = sceneRef.current;
+
+    if (!scene) {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReducedMotion) {
+      setHasEntered(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasEntered(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.4,
+        rootMargin: "0px 0px -10% 0px",
+      },
+    );
+
+    observer.observe(scene);
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (metric.value === null) {
@@ -198,23 +236,51 @@ function MetricScene({
       return;
     }
 
-    const target = metric.value;
-    let frame = 0;
-    const totalFrames = 42;
-    const interval = window.setInterval(() => {
-      frame += 1;
-      const progress = Math.min(frame / totalFrames, 1);
-      setDisplayValue(Math.round(target * progress));
-      if (progress === 1) {
-        window.clearInterval(interval);
-      }
-    }, 24);
+    if (!hasEntered) {
+      setDisplayValue(0);
+      return;
+    }
 
-    return () => window.clearInterval(interval);
-  }, [metric.value]);
+    const target = metric.value;
+    const duration = 1200;
+    let animationFrame = 0;
+    let startTime: number | null = null;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReducedMotion) {
+      setDisplayValue(target);
+      return;
+    }
+
+    const animate = (timestamp: number) => {
+      if (startTime === null) {
+        startTime = timestamp;
+      }
+
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      setDisplayValue(Math.round(target * easedProgress));
+
+      if (progress < 1) {
+        animationFrame = window.requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = window.requestAnimationFrame(animate);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+    };
+  }, [hasEntered, metric.value]);
 
   return (
     <article
+      ref={sceneRef}
       className={`metric-scene metric-scene--${index % 2 === 0 ? "left" : "right"}`}
       data-reveal
     >
