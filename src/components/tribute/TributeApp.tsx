@@ -289,20 +289,26 @@ function MetricScene({
         <span>{displayValue === null ? "N" : displayValue}</span>
         <small>{metric.unit}</small>
       </div>
-     <div className="metric-caption">
+<div className="metric-caption">
   <h3>{metric.label}</h3>
   <p>{metric.note}</p>
 
   {metric.records && metric.records.length > 0 ? (
-    <div className="personal-records">
-      {metric.records.map((record) => (
-        <PersonalRecordRow
-          key={record.event}
-          record={record}
-          active={hasEntered}
-        />
-      ))}
-    </div>
+    <>
+      <h4 className="personal-records-title">
+        종목별 개인 최고기록
+      </h4>
+
+      <div className="personal-records">
+        {metric.records.map((record) => (
+          <PersonalRecordRow
+            key={record.event}
+            record={record}
+            active={hasEntered}
+          />
+        ))}
+      </div>
+    </>
   ) : null}
 </div>
 
