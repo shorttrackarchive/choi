@@ -171,7 +171,7 @@ export const tributeData: TributeData = {
     nameKo: "최민정",
     nameEn: "CHOI MINJEONG",
     dedication: "오랜 시간, 당신은 하나의 시대였습니다.",
-    image: slot("HERO IMAGE", "최민정 선수 헌정 페이지 히어로 이미지", "21 / 13", "50% 35%"),
+    image: slot("HERO IMAGE", "hero-01.wepb", "21 / 13", "50% 35%"),
   },
   careerSummary: {
     intro: "실제 메달 수와 커리어 요약은 추후 입력합니다.",
