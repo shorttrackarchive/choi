@@ -260,7 +260,6 @@ export const tributeData: TributeData = {
     },
   ],
 },
-      },
     ],
   },
 timeline: [
