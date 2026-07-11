@@ -421,6 +421,24 @@ timeline: [
     worldCupOrWorldTour: [],
     additionalNote: "",
   },
+                 {
+    id: "season-2024-25",
+    season: "2024/2025",
+    seasonLabel: "멈춤 끝에 다시 증명하다",
+    seasonSummary:
+      "잠시 숨을 고른 뒤 돌아온 최민정은 다시 세계 정상에 섰다. 휴식 이후에도 변하지 않은 기량으로, 여전히 자신이 월드클래스임을 증명한 시즌이었다.",
+    image: {
+      src: "/images/tribute/timeline/timeline-2024-25.png",
+      alt: "2024-25 시즌 최민정 선수",
+      placeholder: "",
+      ratio: "16 / 11",
+      position: "50% 45%",
+    },
+    olympics: [],
+    worldChampionships: [],
+    worldCupOrWorldTour: [],
+    additionalNote: "",
+  },
 ],
   highlights: Array.from({ length: 10 }, (_, index) => {
     const layouts: HighlightLayout[] = [
