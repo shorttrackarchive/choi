@@ -416,6 +416,21 @@ a {
   border-top: 1px solid var(--line-light);
 }
 
+/* 짝수 번째 시즌은 이미지와 텍스트의 좌우 위치를 반전한다. */
+.season-scene:nth-child(even) {
+  grid-template-columns: minmax(360px, 1.2fr) minmax(280px, 0.8fr);
+}
+
+.season-scene:nth-child(even) .season-title {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.season-scene:nth-child(even) .season-body {
+  grid-column: 1;
+  grid-row: 1;
+}
+
 .season-title {
   position: sticky;
   top: 70px;
@@ -1136,6 +1151,17 @@ a {
 
   .season-title {
     position: static;
+  }
+
+  /* 모바일/태블릿에서는 좌우 반전을 해제하고 자연스러운 세로 흐름으로 표시한다. */
+  .season-scene:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .season-scene:nth-child(even) .season-title,
+  .season-scene:nth-child(even) .season-body {
+    grid-column: auto;
+    grid-row: auto;
   }
 
   .tear-grid {
