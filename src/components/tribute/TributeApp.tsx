@@ -303,7 +303,7 @@ function CareerTimelineSection({ seasons }: { seasons: TimelineSeason[] }) {
       <SectionHeading
         eyebrow="02 / Seasons"
         title="최민정이 달려온 시간"
-        description="시즌별 기록과 대표 이미지를 한 시즌씩 지나가듯 배치합니다."
+        description="한 시즌씩 쌓여, 한 시대가 되기까지"
       />
       <div className="timeline-scenes">
         {seasons.map((season) => (
