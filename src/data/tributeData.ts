@@ -213,10 +213,16 @@ export const tributeData: TributeData = {
       {
         id: "worldcup-medals",
         label: "월드컵·월드투어 메달",
-        value: null,
+        value: 102,
         unit: "개",
-        note: "실제 숫자 입력 예정",
-        image: slot("CAREER 03", "월드컵 또는 월드투어 관련 이미지", "5 / 4", "50% 50%"),
+        note: "금메달 51개, 은메달 34개, 동메달 17개",
+        image: {
+    src: "/images/tribute/career/career-03.jpg",
+    alt: "최민정 선수 헌정 페이지 히어로 이미지",
+    placeholder: "",
+    ratio: "5 / 4",
+    position: "50% 50%",
+  },
       },
       {
         id: "other-medals",
