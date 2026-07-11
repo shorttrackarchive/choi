@@ -195,6 +195,7 @@ export const tributeData: TributeData = {
     ratio: "21 / 13",
     position: "50% 35%",
   },
+      },
       {
         id: "world-medals",
         label: "세계선수권 메달",
