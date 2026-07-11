@@ -180,16 +180,21 @@ export const tributeData: TributeData = {
   },
   },
   careerSummary: {
-    intro: "실제 메달 수와 커리어 요약은 추후 입력합니다.",
+    intro: "숫자로 돌아보는 최민정의 시간",
     metrics: [
       {
         id: "olympic-medals",
         label: "올림픽 메달",
-        value: null,
+        value: 7,
         unit: "개",
-        note: "계주 포함, 실제 숫자 입력 예정",
-        image: slot("CAREER 01", "올림픽 메달 관련 이미지", "4 / 5", "50% 42%"),
-      },
+        note: "금메달 4개, 은메달 3개",
+        image: {
+    src: "/images/tribute/career/career-01.jpg",
+    alt: "최민정 선수 헌정 페이지 히어로 이미지",
+    placeholder: "",
+    ratio: "21 / 13",
+    position: "50% 35%",
+  },
       {
         id: "world-medals",
         label: "세계선수권 메달",
