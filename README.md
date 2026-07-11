@@ -57,3 +57,15 @@ NEXT_PUBLIC_TRIBUTE_DEMO_MODE=false
 ## 실제 자료 입력
 
 대부분의 자료는 `src/data/tributeData.ts`에 입력합니다. 이미지 파일은 `public/images/tribute/` 아래 섹션별 폴더에 추가한 뒤 데이터의 `image.src`에 경로를 연결합니다.
+
+## GitHub Pages
+
+GitHub Pages용 정적 빌드는 별도로 준비되어 있습니다.
+
+```bash
+pnpm run build:github
+```
+
+GitHub 저장소에서는 `Settings -> Pages -> Source`를 `GitHub Actions`로 설정한 뒤
+`main` 브랜치에 push하면 `.github/workflows/github-pages.yml`이 `dist-github/`
+결과물을 배포합니다. 자세한 안내는 `docs/github-pages.md`를 확인하세요.

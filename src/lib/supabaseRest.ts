@@ -21,11 +21,27 @@ export type AdminSession = {
   };
 };
 
+type PublicEnv = Record<string, string | undefined>;
+
+const nodePublicEnv: PublicEnv =
+  typeof process !== "undefined" && process.env ? process.env : {};
+
+const vitePublicEnv: PublicEnv =
+  typeof import.meta !== "undefined" && "env" in import.meta
+    ? ((import.meta as ImportMeta & { env?: PublicEnv }).env ?? {})
+    : {};
+
 const supabaseUrl =
-  process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.VITE_SUPABASE_URL || "";
+  nodePublicEnv.NEXT_PUBLIC_SUPABASE_URL ||
+  nodePublicEnv.VITE_SUPABASE_URL ||
+  vitePublicEnv.NEXT_PUBLIC_SUPABASE_URL ||
+  vitePublicEnv.VITE_SUPABASE_URL ||
+  "";
 const supabaseAnonKey =
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-  process.env.VITE_SUPABASE_ANON_KEY ||
+  nodePublicEnv.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  nodePublicEnv.VITE_SUPABASE_ANON_KEY ||
+  vitePublicEnv.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  vitePublicEnv.VITE_SUPABASE_ANON_KEY ||
   "";
 
 export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);

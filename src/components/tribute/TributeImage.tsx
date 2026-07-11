@@ -1,11 +1,32 @@
 import type { ImageSlot } from "@/src/data/tributeData";
 import type { CSSProperties } from "react";
 
+declare global {
+  interface Window {
+    __TRIBUTE_ASSET_BASE__?: string;
+  }
+}
+
 type TributeImageProps = {
   slot: ImageSlot;
   className?: string;
   priority?: boolean;
 };
+
+function resolveImageSrc(src: string) {
+  if (/^(?:https?:|data:|blob:)/.test(src) || !src.startsWith("/")) {
+    return src;
+  }
+
+  const assetBase =
+    typeof window !== "undefined" ? window.__TRIBUTE_ASSET_BASE__ || "" : "";
+
+  if (!assetBase || assetBase === "/") {
+    return src;
+  }
+
+  return `${assetBase.replace(/\/$/, "")}${src}`;
+}
 
 export function TributeImage({
   slot,
@@ -21,7 +42,7 @@ export function TributeImage({
     <figure className={`tribute-image ${className}`} style={style}>
       {slot.src ? (
         <img
-          src={slot.src}
+          src={resolveImageSrc(slot.src)}
           alt={slot.alt}
           loading={priority ? "eager" : "lazy"}
           fetchPriority={priority ? "high" : "auto"}
