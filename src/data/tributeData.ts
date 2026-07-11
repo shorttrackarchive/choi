@@ -6,6 +6,12 @@ export type ImageSlot = {
   ratio?: string;
 };
 
+export type PersonalBestRecord = {
+  event: string;
+  value: number;
+  worldRecord?: boolean;
+};
+
 export type MedalMetric = {
   id: string;
   label: string;
@@ -13,6 +19,7 @@ export type MedalMetric = {
   unit: string;
   note: string;
   image?: ImageSlot;
+  records?: PersonalBestRecord[];
 };
 
 export type TimelineEventGroup = {
@@ -237,6 +244,22 @@ export const tributeData: TributeData = {
     ratio: "16 / 10",
     position: "50% 50%",
   },
+        records: [
+    {
+      event: "500m",
+      value: 41.955,
+    },
+    {
+      event: "1000m",
+      value: 86.850,
+    },
+    {
+      event: "1500m",
+      value: 134.354,
+      worldRecord: true,
+    },
+  ],
+},
       },
     ],
   },
