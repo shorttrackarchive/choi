@@ -18,11 +18,26 @@ import {
   submitFanMessage,
   type FanMessage,
 } from "@/src/lib/supabaseRest";
+import { submitPollVote } from "@/src/lib/pollVotes";
 import { TributeImage } from "./TributeImage";
 
 type TributeAppProps = {
   data: TributeData;
 };
+
+type PollSubmissionStatus =
+  | "idle"
+  | "loading"
+  | "recorded"
+  | "duplicate"
+  | "error";
+
+type PollSubmission = {
+  status: PollSubmissionStatus;
+  message?: string;
+};
+
+type PollSubmissionMap = Record<string, PollSubmission>;
 
 const sections = [
   ["records", "기록"],
@@ -39,9 +54,7 @@ const sections = [
 export function TributeApp({ data }: TributeAppProps) {
   const [messages, setMessages] = useState<FanMessage[]>([]);
   const [activePoll, setActivePoll] = useState<Record<string, string>>({});
-  const [pollSubmitted, setPollSubmitted] = useState<Record<string, boolean>>(
-    {},
-  );
+  const [pollSubmissions, setPollSubmissions] = useState<PollSubmissionMap>({});
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -80,6 +93,39 @@ export function TributeApp({ data }: TributeAppProps) {
     data.polls,
   ]);
 
+  const handlePollSubmit = async (pollId: string) => {
+    const optionId = activePoll[pollId];
+
+    if (!optionId) {
+      return;
+    }
+
+    setPollSubmissions((current) => ({
+      ...current,
+      [pollId]: { status: "loading", message: "투표를 기록하는 중입니다." },
+    }));
+
+    try {
+      const result = await submitPollVote({ pollId, optionId });
+
+      setPollSubmissions((current) => ({
+        ...current,
+        [pollId]: { status: result.status, message: result.message },
+      }));
+    } catch (error) {
+      setPollSubmissions((current) => ({
+        ...current,
+        [pollId]: {
+          status: "error",
+          message:
+            error instanceof Error
+              ? error.message
+              : "투표를 기록하지 못했습니다. 잠시 후 다시 시도해 주세요.",
+        },
+      }));
+    }
+  };
+
   return (
     <main className="tribute-shell">
       <a className="skip-link" href="#records">
@@ -99,13 +145,11 @@ export function TributeApp({ data }: TributeAppProps) {
       <FanPollSection
         polls={pollData}
         activePoll={activePoll}
-        pollSubmitted={pollSubmitted}
+        pollSubmissions={pollSubmissions}
         onSelect={(pollId, optionId) =>
           setActivePoll((current) => ({ ...current, [pollId]: optionId }))
         }
-        onSubmit={(pollId) =>
-          setPollSubmitted((current) => ({ ...current, [pollId]: true }))
-        }
+        onSubmit={handlePollSubmit}
       />
       <FanMessageSection messages={messages} setMessages={setMessages} />
       <TributeClosing closing={data.closing} />
@@ -613,13 +657,13 @@ function QuoteItemView({ quote }: { quote: TributeData["quotes"][number] }) {
 function FanPollSection({
   polls,
   activePoll,
-  pollSubmitted,
+  pollSubmissions,
   onSelect,
   onSubmit,
 }: {
   polls: Poll[];
   activePoll: Record<string, string>;
-  pollSubmitted: Record<string, boolean>;
+  pollSubmissions: PollSubmissionMap;
   onSelect: (pollId: string, optionId: string) => void;
   onSubmit: (pollId: string) => void;
 }) {
@@ -646,7 +690,7 @@ function FanPollSection({
               key={poll.id}
               poll={poll}
               selected={activePoll[poll.id]}
-              submitted={Boolean(pollSubmitted[poll.id])}
+              submission={pollSubmissions[poll.id]}
               onSelect={(optionId) => onSelect(poll.id, optionId)}
               onSubmit={() => onSubmit(poll.id)}
             />
@@ -660,16 +704,29 @@ function FanPollSection({
 function PollItem({
   poll,
   selected,
-  submitted,
+  submission,
   onSelect,
   onSubmit,
 }: {
   poll: Poll;
   selected?: string;
-  submitted: boolean;
+  submission?: PollSubmission;
   onSelect: (optionId: string) => void;
   onSubmit: () => void;
 }) {
+  const status = submission?.status ?? "idle";
+  const isLoading = status === "loading";
+  const isFinal = status === "recorded" || status === "duplicate";
+  const statusMessage =
+    submission?.message ||
+    (status === "recorded"
+      ? "투표가 기록되었습니다. 같은 IP에서는 다시 투표할 수 없습니다."
+      : status === "duplicate"
+        ? "이미 이 IP에서 투표가 기록되었습니다."
+        : status === "loading"
+          ? "투표를 기록하는 중입니다."
+          : "");
+
   return (
     <article className="poll-item" data-reveal>
       <div className="poll-copy">
@@ -684,6 +741,7 @@ function PollItem({
             key={option.id}
             onClick={() => onSelect(option.id)}
             aria-pressed={selected === option.id}
+            disabled={isLoading || isFinal}
           >
             {option.image ? <TributeImage slot={option.image} /> : null}
             <span>{option.label}</span>
@@ -691,18 +749,24 @@ function PollItem({
           </button>
         ))}
       </div>
-      {submitted ? (
-        <p className="poll-status">투표가 기록되었습니다.</p>
-      ) : (
+      {!isFinal ? (
         <button
           className="primary-action"
           type="button"
           onClick={onSubmit}
-          disabled={!selected}
+          disabled={!selected || isLoading}
         >
-          투표하기
+          {isLoading ? "기록 중" : "투표하기"}
         </button>
-      )}
+      ) : null}
+      {status !== "idle" ? (
+        <p
+          className={`poll-status ${status === "error" ? "poll-status--error" : ""}`}
+          role="status"
+        >
+          {statusMessage}
+        </p>
+      ) : null}
     </article>
   );
 }

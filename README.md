@@ -22,6 +22,7 @@
 - 헌정 페이지 컴포넌트: `src/components/tribute/`
 - 메시지 관리자 컴포넌트: `src/components/admin/`
 - Supabase REST 연동: `src/lib/supabaseRest.ts`
+- IP 제한 투표 API 안내: `docs/ip-limited-poll-api.md`
 - 콘텐츠 입력 가이드: `docs/content-entry-guide.md`
 - Supabase SQL/RLS 설계: `docs/supabase-schema.sql`
 
@@ -51,8 +52,12 @@ pnpm run build
 NEXT_PUBLIC_SITE_URL=https://your-site.example
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+NEXT_PUBLIC_POLL_API_URL=https://your-project.supabase.co/functions/v1/poll-vote
 NEXT_PUBLIC_TRIBUTE_DEMO_MODE=false
 ```
+
+GitHub Pages 배포에서는 저장소 Variables에 `VITE_POLL_API_URL`을 등록하면
+정적 빌드에 투표 API 주소가 주입됩니다.
 
 ## 실제 자료 입력
 

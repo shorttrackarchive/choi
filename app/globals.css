@@ -975,6 +975,10 @@ a {
   color: #557b64;
 }
 
+.poll-status--error {
+  color: #d18585;
+}
+
 .message-layout {
   display: grid;
   grid-template-columns: minmax(280px, 0.55fr) minmax(340px, 1fr);

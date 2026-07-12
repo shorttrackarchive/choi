@@ -39,15 +39,18 @@ create table if not exists public.poll_options (
   label text not null,
   image text,
   meta text,
-  sort_order integer not null default 0
+  sort_order integer not null default 0,
+  unique (poll_id, id)
 );
 
 create table if not exists public.poll_votes (
   id uuid primary key default gen_random_uuid(),
-  poll_id uuid not null references public.polls(id) on delete cascade,
-  option_id uuid not null references public.poll_options(id) on delete cascade,
+  poll_id uuid not null,
+  option_id uuid not null,
   voter_hash text not null,
   created_at timestamptz not null default now(),
+  foreign key (poll_id) references public.polls(id) on delete cascade,
+  foreign key (poll_id, option_id) references public.poll_options(poll_id, id) on delete cascade,
   unique (poll_id, voter_hash)
 );
 
@@ -154,19 +157,10 @@ to authenticated
 using (public.is_tribute_admin())
 with check (public.is_tribute_admin());
 
+-- Poll votes are inserted only by a trusted server endpoint.
+-- The endpoint derives voter_hash from the request IP plus a private salt.
+-- Do not allow anonymous clients to insert voter_hash directly.
 drop policy if exists "Anyone can cast a poll vote" on public.poll_votes;
-create policy "Anyone can cast a poll vote"
-on public.poll_votes
-for insert
-to anon, authenticated
-with check (
-  exists (
-    select 1
-    from public.polls
-    where polls.id = poll_votes.poll_id
-      and polls.is_active = true
-  )
-);
 
 drop policy if exists "Admins can read poll votes" on public.poll_votes;
 create policy "Admins can read poll votes"
