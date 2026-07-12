@@ -27,14 +27,65 @@ body {
   background: var(--ink);
   color: var(--ice);
   font-family: var(--font-ko);
+  line-break: strict;
   line-height: 1.6;
   overflow-x: hidden;
+  word-break: keep-all;
 }
 
 button,
 input,
 textarea {
   font: inherit;
+}
+
+:where(h1, h2, h3, h4, p, span, small, blockquote, button, a, label, li, time) {
+  hyphens: manual;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+:where(
+  .hero-copy h1,
+  .section-heading h2,
+  .metric-caption h3,
+  .season-title span,
+  .highlight-copy h3,
+  .keyword-scene h3,
+  .tear-card h3,
+  .quote-item blockquote,
+  .poll-empty h3,
+  .poll-copy h3,
+  .closing-copy h2,
+  .admin-hero h1
+) {
+  text-wrap: balance;
+}
+
+:where(
+  .section-heading span,
+  .hero-copy > span,
+  .metric-caption p,
+  .season-title p,
+  .season-details > p,
+  .season-group li,
+  .highlight-copy span,
+  .keyword-scene p,
+  .tear-card p,
+  .tear-card span,
+  .quote-item p,
+  .poll-empty p,
+  .poll-copy p,
+  .message-form p,
+  .message-empty p,
+  .closing-copy p,
+  .admin-hero span
+) {
+  text-wrap: pretty;
+}
+
+:where(input, textarea, .message-wall article p, .moderation-item p) {
+  overflow-wrap: break-word;
 }
 
 button,
@@ -449,7 +500,7 @@ a {
   font-size: 1.55rem;
   font-weight: 650;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .world-record-icon {
