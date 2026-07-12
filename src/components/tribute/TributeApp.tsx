@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   MAX_FAN_MESSAGE_LENGTH,
   type Highlight,
@@ -38,6 +38,10 @@ type PollSubmission = {
 };
 
 type PollSubmissionMap = Record<string, PollSubmission>;
+
+type BgmPlaybackState = "checking" | "playing" | "blocked" | "paused" | "error";
+
+const BGM_PREFERENCE_KEY = "choi-tribute-bgm";
 
 const sections = [
   ["records", "기록"],
@@ -132,6 +136,7 @@ export function TributeApp({ data }: TributeAppProps) {
         본문으로 이동
       </a>
       <SceneNav />
+      <BackgroundMusicControl music={data.backgroundMusic} />
       <TributeHero data={data.hero} />
       <CareerSummarySection
         intro={data.careerSummary.intro}
@@ -154,6 +159,172 @@ export function TributeApp({ data }: TributeAppProps) {
       <FanMessageSection messages={messages} setMessages={setMessages} />
       <TributeClosing closing={data.closing} />
     </main>
+  );
+}
+
+function BackgroundMusicControl({
+  music,
+}: {
+  music?: TributeData["backgroundMusic"];
+}) {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const isAttemptingRef = useRef(false);
+  const [playbackState, setPlaybackState] =
+    useState<BgmPlaybackState>("checking");
+  const hasSource = Boolean(music?.src);
+  const title = music?.title || "BGM";
+  const volume = Math.min(Math.max(music?.volume ?? 0.36, 0), 1);
+
+  const savePreference = useCallback((value: "on" | "off") => {
+    try {
+      window.localStorage.setItem(BGM_PREFERENCE_KEY, value);
+    } catch {
+      // Storage can be unavailable in private browsing modes.
+    }
+  }, []);
+
+  const attemptPlayback = useCallback(async () => {
+    const audio = audioRef.current;
+
+    if (!audio || !hasSource || isAttemptingRef.current) {
+      return;
+    }
+
+    isAttemptingRef.current = true;
+    setPlaybackState((current) => (current === "playing" ? current : "checking"));
+
+    try {
+      audio.volume = volume;
+      audio.muted = false;
+      await audio.play();
+      savePreference("on");
+      setPlaybackState("playing");
+    } catch {
+      if (audio.error) {
+        setPlaybackState("error");
+      } else {
+        setPlaybackState("blocked");
+      }
+    } finally {
+      isAttemptingRef.current = false;
+    }
+  }, [hasSource, savePreference, volume]);
+
+  useEffect(() => {
+    if (!hasSource) {
+      return;
+    }
+
+    let preference: string | null = null;
+
+    try {
+      preference = window.localStorage.getItem(BGM_PREFERENCE_KEY);
+    } catch {
+      preference = null;
+    }
+
+    if (preference === "off") {
+      setPlaybackState("paused");
+      return;
+    }
+
+    void attemptPlayback();
+  }, [attemptPlayback, hasSource]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    if (!audio) {
+      return;
+    }
+
+    const handleError = () => {
+      setPlaybackState("error");
+    };
+
+    audio.addEventListener("error", handleError);
+
+    return () => audio.removeEventListener("error", handleError);
+  }, []);
+
+  useEffect(() => {
+    if (playbackState !== "blocked") {
+      return;
+    }
+
+    const retryFromInteraction = (event: Event) => {
+      const target = event.target;
+
+      if (target instanceof Element && target.closest(".bgm-control")) {
+        return;
+      }
+
+      void attemptPlayback();
+    };
+
+    window.addEventListener("click", retryFromInteraction);
+    window.addEventListener("pointerdown", retryFromInteraction);
+    window.addEventListener("touchstart", retryFromInteraction, {
+      passive: true,
+    });
+    window.addEventListener("scroll", retryFromInteraction, { passive: true });
+
+    return () => {
+      window.removeEventListener("click", retryFromInteraction);
+      window.removeEventListener("pointerdown", retryFromInteraction);
+      window.removeEventListener("touchstart", retryFromInteraction);
+      window.removeEventListener("scroll", retryFromInteraction);
+    };
+  }, [attemptPlayback, playbackState]);
+
+  const togglePlayback = async () => {
+    const audio = audioRef.current;
+
+    if (!audio) {
+      return;
+    }
+
+    if (playbackState === "playing") {
+      audio.pause();
+      savePreference("off");
+      setPlaybackState("paused");
+      return;
+    }
+
+    await attemptPlayback();
+  };
+
+  if (!hasSource) {
+    return null;
+  }
+
+  const isPlaying = playbackState === "playing";
+  const isChecking = playbackState === "checking";
+  const isUnavailable = playbackState === "error";
+  const buttonLabel = isPlaying
+    ? "BGM 끄기"
+    : isUnavailable
+      ? "BGM 준비 중"
+      : "BGM 켜기";
+  const ariaLabel = isPlaying
+    ? `${title} 끄기`
+    : isUnavailable
+      ? `${title} 준비 중`
+      : `${title} 켜기`;
+
+  return (
+    <div className={`bgm-control bgm-control--${playbackState}`}>
+      <audio ref={audioRef} src={music?.src} loop preload="auto" />
+      <button
+        type="button"
+        onClick={togglePlayback}
+        aria-pressed={isPlaying}
+        aria-label={ariaLabel}
+        disabled={isChecking || isUnavailable}
+      >
+        {isChecking ? "BGM 확인 중" : buttonLabel}
+      </button>
+    </div>
   );
 }
 

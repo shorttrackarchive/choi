@@ -122,6 +122,12 @@ export type Poll = {
   resultDisplayType: "bars" | "imageGrid" | "largeType";
 };
 
+export type BackgroundMusic = {
+  src: string;
+  title: string;
+  volume: number;
+};
+
 export type TributeData = {
   hero: {
     nameKo: string;
@@ -139,6 +145,7 @@ export type TributeData = {
   tears: TearMoment[];
   quotes: QuoteItem[];
   polls: Poll[];
+  backgroundMusic?: BackgroundMusic;
   closing: {
     closingTitle: string;
     closingText: string;
@@ -626,6 +633,11 @@ timeline: [
     link: "",
   })),
   polls: [],
+  backgroundMusic: {
+    src: "/audio/tribute-bgm.mp3",
+    title: "최민정 헌정 BGM",
+    volume: 0.36,
+  },
   closing: {
     closingTitle: "오랫동안 기억하겠습니다.",
     closingText: "마지막 문장이 들어갑니다.",
