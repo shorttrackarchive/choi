@@ -545,13 +545,37 @@ timeline: [
     };
   }),
   keywords: [
-    "키워드 01",
-    "키워드 02",
-    "키워드 03",
-    "키워드 04",
-    "키워드 05",
-    "키워드 06",
-  ].map((keyword, index) => {
+    {
+      keyword: "아웃코스의 지배자",
+      description:
+        "바깥 라인을 돌아도 속도를 잃지 않고, 가장 좁은 틈을 가장 큰 길로 만드는 선수. 최민정의 아웃코스는 추월을 넘어 흐름을 빼앗는 장면이었다.",
+    },
+    {
+      keyword: "1500m의 황제",
+      description:
+        "긴 호흡의 레이스에서 기다릴 줄 알고, 마지막 랩에서 판을 바꾸는 힘. 1500m는 최민정의 체력, 판단, 폭발력이 가장 선명하게 드러난 거리였다.",
+    },
+    {
+      keyword: "완성형 올라운더",
+      description:
+        "스프린트의 순발력, 중장거리의 지구력, 계주의 팀플레이까지 모두 갖춘 선수. 한 종목의 강자가 아니라 경기 전체를 읽는 올라운더였다.",
+    },
+    {
+      keyword: "역대급 2번 주자",
+      description:
+        "계주에서 흐름을 살리고 간격을 되찾아 오는 구간, 최민정은 그 역할을 가장 믿음직하게 수행했다. 2번 주자로 나설 때 팀의 레이스는 다시 안정감을 찾았다.",
+    },
+    {
+      keyword: "결정적 순간의 승부사",
+      description:
+        "막판 한 번의 선택, 코너 하나의 판단, 결승선 앞 마지막 가속. 가장 큰 장면에서 주저하지 않는 담대함이 최민정을 특별하게 만들었다.",
+    },
+    {
+      keyword: "11시즌 금메달",
+      description:
+        "잠깐 빛난 선수가 아니라 오래 증명한 선수. 11시즌 동안 이어진 금메달은 재능보다 더 어려운 꾸준함의 기록이었다.",
+    },
+  ].map(({ keyword, description }, index) => {
     const layouts: KeywordLayout[] = [
       "fullText",
       "imageLeft",
@@ -564,7 +588,7 @@ timeline: [
     return {
       id: `keyword-${index + 1}`,
       keyword,
-      description: "키워드 설명이 들어갑니다.",
+      description,
       image: slot(
         `KEYWORD ${String(index + 1).padStart(2, "0")}`,
         "키워드 관련 이미지",

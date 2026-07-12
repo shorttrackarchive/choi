@@ -515,7 +515,7 @@ function KeywordsSection({ keywords }: { keywords: KeywordItem[] }) {
       <SectionHeading
         eyebrow="04 / Interpretation"
         title="최민정을 말하는 키워드"
-        description="기록을 나열하지 않고, 한 선수를 해석하는 장면으로 구성합니다."
+        description="우리가 기억하는 최민정"
       />
       <div className="keyword-stack">
         {keywords.map((keyword) => (
